@@ -388,7 +388,7 @@ nav a:hover, nav a.active {
 }
 
 .about-image img {
-    width: 50%;
+    width: 100%;
     
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -1442,4 +1442,5 @@ select[multiple] {
     .detail-content {
         padding: 20px 0 !important;
     }
+
 }
