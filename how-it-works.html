@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works | Lytfoot</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #32502c;
+            --secondary: #7fdb34;
+            --accent: #7fdb34;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #f8f9fa;
+            --pink: #ff6b8b;
+            --purple: #9b59b6;
+            --teal: #7fdb34;
+            --blue: #3498db;
+            --yellow: #f1c40f;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-teal {
+            background-color: var(--teal);
+        }
+
+        .btn-teal:hover {
+            background-color: #16a085;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        .nav-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 193, 7, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 139, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(155, 89, 182, 0.5) 0%, transparent 50%);
+        }
+
+        .wave-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--gray);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .intro-text p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .intro-image {
+            position: relative;
+        }
+
+        .abstract-bg {
+            width: 100%;
+            height: 400px;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(255, 193, 7, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255, 107, 139, 0.6) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(155, 89, 182, 0.5) 0%, transparent 50%),
+                linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abstract-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px);
+        }
+
+        /* Journey Section */
+        .journey-section {
+            padding: 80px 0;
+        }
+
+        .journey-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .journey-steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 40px;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--teal), var(--blue));
+            z-index: 1;
+        }
+
+        .journey-step {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--teal) 0%, var(--blue) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex: 1;
+        }
+
+        .step-content h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Why Work Section */
+        .why-work-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .why-work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .why-work-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .why-work-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .why-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .icon-purple {
+            background: linear-gradient(135deg, var(--purple) 0%, #8e44ad 100%);
+        }
+
+        .icon-green {
+            background: linear-gradient(135deg, var(--secondary) 0%, #27ae60 100%);
+        }
+
+        .icon-pink {
+            background: linear-gradient(135deg, var(--pink) 0%, #e84393 100%);
+        }
+
+        .why-work-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .why-work-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-text {
+            color: white;
+        }
+
+        .footer-logo p {
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .link-group h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .link-group ul li {
+            margin-bottom: 10px;
+        }
+
+        .link-group a {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .link-group a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.4s;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .intro-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-hero h1 {
+                font-size: 36px;
+            }
+            
+            .journey-steps::before {
+                left: 30px;
+            }
+            
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+            
+            .why-work-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .abstract-bg {
+                height: 300px;
+            }
+            
+            .journey-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .journey-steps::before {
+                display: none;
+            }
+            
+            .step-number {
+                align-self: center;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                <div class="logo-text">Lytfoot</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li>How It Works</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-background"></div>
+        <div class="wave-pattern"></div>
+        <div class="container hero-content">
+            <h1>How it works?</h1>
+            <p>A structured approach to data monetization</p>
+            
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2>Structured Data Monetization Process</h2>
+                    <p>Monetizing your data is not just about selling it – it is about packaging it correctly, aligning with market demand and ensuring compliance.</p>
+                    <p>Lytfoot's end-to-end data monetization consulting provides the structure, expertise and buyer connections to ensure a successful outcome.</p>
+                </div>
+                <div class="intro-image">
+                    <div class="abstract-bg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section class="journey-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your journey from owning data to selling data</h2>
+            </div>
+            <div class="journey-steps">
+                <div class="journey-step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Data audit</h3>
+                        <p>Our experts evaluate the quality, completeness and suitability of your data for monetization, helping you identify potential products and use cases. We assess data structure, coverage, and potential value propositions.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Risk assessment</h3>
+                        <p>We review potential compliance, reputational and customer relationship risks, creating a secure environment for you to explore data monetization. Our legal experts ensure GDPR, CCPA and other regulatory compliance.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Market-fit analysis</h3>
+                        <p>We undertake a comprehensive analysis of market demand, competitive dynamics and specific use cases to determine your data's true market value. This includes pricing strategy development and target buyer identification.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Go-to-market strategy</h3>
+                        <p>We consolidate all project outputs into clear and actionable go-to-market materials. We facilitate introductions to data buyers aligned with your market entry objectives, providing direct access to beta testers and early adopters.</p>
+                    </div>
+                </div>
+                
+                <div class="journey-step">
+                    <div class="step-number">05</div>
+                    <div class="step-content">
+                        <h3>Revenue generation</h3>
+                        <p>Realise the earning potential of your data assets. Gain immediate exposure to over 1,000 active data buyers by listing your data for free on Lytfoot's platform and amplify your reach through exclusive Lytfoot events and targeted marketing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Work Section -->
+    <section class="why-work-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why work with Lytfoot?</h2>
+            </div>
+            <div class="why-work-grid">
+                <div class="why-work-card">
+                    <div class="why-icon icon-purple">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Industry-leading expertise in data monetization</h3>
+                    <p>Our team brings decades of combined experience in data strategy, market analysis, and commercial implementation across multiple industries and data types.</p>
+                </div>
+                
+                <div class="why-work-card">
+                    <div class="why-icon icon-green">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Trusted by global enterprises seeking secure data commercialisation</h3>
+                    <p>We've helped Fortune 500 companies and innovative startups alike navigate the complex landscape of data monetization while maintaining compliance and security.</p>
+                </div>
+                
+                <div class="why-work-card">
+                    <div class="why-icon icon-pink">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Unrivalled network of data buyers across multiple sectors</h3>
+                    <p>Access our curated network of 1,000+ qualified data buyers across financial services, retail, technology, healthcare, and other data-hungry industries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Not sure where to start? Let our experts assess your data potential.</h2>
+            <p>Begin your data monetization journey with a free initial consultation</p>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                        <div class="logo-text">Lytfoot</div>
+                    </div>
+                    <p>Transforming data into business advantage</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="solutions.html#data-buyers">For Data Buyers</a></li>
+                            <li><a href="solutions.html#data-sellers">For Data Sellers</a></li>
+                            <li><a href="solutions.html#data-monetization">Data Monetization</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:info@lytfoot.co.uk">info@lytfoot.co.uk</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lytfoot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Consultation Modal -->
+    <div class="modal" id="consultation-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Free Initial Consultation</h2>
+            <form id="consultation-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry" name="industry" required>
+                        <option value="">Select your industry</option>
+                        <option value="retail">Retail</option>
+                        <option value="finance">Finance</option>
+                        <option value="technology">Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="data-description">Tell us about your data</label>
+                    <textarea id="data-description" name="data-description" rows="4" placeholder="Briefly describe the type of data you have and your monetization goals..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="challenges">What challenges are you facing?</label>
+                    <select id="challenges" name="challenges">
+                        <option value="">Select primary challenge</option>
+                        <option value="compliance">Compliance & Regulations</option>
+                        <option value="valuation">Data Valuation</option>
+                        <option value="buyers">Finding Buyers</option>
+                        <option value="packaging">Data Packaging</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-teal">Request Consultation</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const modal = document.getElementById('consultation-modal');
+            const consultationBtns = document.querySelectorAll('#hero-consultation, #intro-consultation, #cta-consultation');
+            const closeBtn = modal.querySelector('.close');
+            
+            // Open modal when consultation button is clicked
+            consultationBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            });
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            const consultationForm = document.getElementById('consultation-form');
+            
+            if (consultationForm) {
+                consultationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+                    
+                    // In a real implementation, you would send this data to your server
+                    // For this example, we'll just show a success message
+                    alert('Thank you for your consultation request! We will contact you within 24 hours to schedule your free initial consultation.');
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Close modal
+                    modal.style.display = 'none';
+                });
+            }
+            
+            // Request demo button functionality
+            const requestDemoBtn = document.getElementById('request-demo-btn');
+            if (requestDemoBtn) {
+                requestDemoBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('For demo requests, please visit our main solutions page or contact us directly.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

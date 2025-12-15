@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who Buys Your Data? | Lytfoot</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #32502c;
+            --secondary: #7fdb34;
+            --accent: #7fdb34;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #f8f9fa;
+            --pink: #ff6b8b;
+            --purple: #9b59b6;
+            --teal: #7fdb34;
+            --blue: #3498db;
+            --dark-purple: #8e44ad;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-teal {
+            background-color: var(--teal);
+        }
+
+        .btn-teal:hover {
+            background-color: #16a085;
+        }
+
+        .btn-purple {
+            background-color: var(--purple);
+        }
+
+        .btn-purple:hover {
+            background-color: #8e44ad;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        .nav-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #8e44ad 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(155, 89, 182, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 139, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(52, 152, 219, 0.5) 0%, transparent 50%);
+        }
+
+        .cube-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .cube {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--purple), var(--pink), var(--blue));
+            transform: rotate(45deg);
+            animation: float 20s infinite linear;
+        }
+
+        .cube:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .cube:nth-child(2) { top: 20%; right: 15%; animation-delay: -5s; }
+        .cube:nth-child(3) { bottom: 15%; left: 20%; animation-delay: -10s; }
+        .cube:nth-child(4) { bottom: 25%; right: 10%; animation-delay: -15s; }
+        .cube:nth-child(5) { top: 40%; left: 50%; animation-delay: -7s; }
+
+        @keyframes float {
+            0% { transform: rotate(45deg) translateY(0) rotate(0deg); }
+            100% { transform: rotate(45deg) translateY(-100px) rotate(360deg); }
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--gray);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .intro-text p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .intro-image {
+            position: relative;
+        }
+
+        .abstract-cubes {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #2c3e50 0%, #8e44ad 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abstract-cubes::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .floating-cube {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            transform: rotate(45deg);
+            animation: floatCube 15s infinite ease-in-out;
+        }
+
+        .floating-cube:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+        .floating-cube:nth-child(2) { top: 60%; right: 25%; animation-delay: -3s; }
+        .floating-cube:nth-child(3) { bottom: 30%; left: 40%; animation-delay: -6s; }
+
+        @keyframes floatCube {
+            0%, 100% { transform: rotate(45deg) translateY(0) scale(1); }
+            50% { transform: rotate(45deg) translateY(-20px) scale(1.1); }
+        }
+
+        /* Testimonial Section */
+        .testimonial-section {
+            padding: 80px 0;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            border-left: 4px solid var(--purple);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 80px;
+            color: var(--light-gray);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-text {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Buyers Section */
+        .buyers-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .buyers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .buyer-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--purple);
+        }
+
+        .buyer-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .buyer-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--purple) 0%, #8e44ad 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .buyer-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .buyer-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 80px 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .process-step {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--teal);
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--teal);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .process-step h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .process-step p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-text {
+            color: white;
+        }
+
+        .footer-logo p {
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .link-group h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .link-group ul li {
+            margin-bottom: 10px;
+        }
+
+        .link-group a {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .link-group a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.4s;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .intro-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-hero h1 {
+                font-size: 36px;
+            }
+            
+            .buyers-grid, .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .abstract-cubes {
+                height: 300px;
+            }
+            
+            .testimonial-card::before {
+                font-size: 60px;
+                top: 10px;
+                left: 20px;
+            }
+            
+            .testimonial-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                <div class="logo-text">Lytfoot</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li>Who Buys Your Data</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-background"></div>
+        <div class="cube-pattern">
+            <div class="cube"></div>
+            <div class="cube"></div>
+            <div class="cube"></div>
+            <div class="cube"></div>
+            <div class="cube"></div>
+        </div>
+        <div class="container hero-content">
+            <h1>Who buys your data?</h1>
+            <p>Access a global network of data buyers</p>
+            
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2>Connect with the Right Data Buyers</h2>
+                    <p>Lytfoot opens doors to an extensive network of high-value data buyers. With deep connections and unmatched industry insights, we know who is actively looking for data and who you need to speak to.</p>
+                    <p>Lytfoot facilitates powerful introductions, ensuring perfect alignment between your data and the right decision-makers.</p>
+                </div>
+                <div class="intro-image">
+                    <div class="abstract-cubes">
+                        <div class="floating-cube"></div>
+                        <div class="floating-cube"></div>
+                        <div class="floating-cube"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Buyers Section -->
+    <section class="buyers-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Who needs your data?</h2>
+            </div>
+            <div class="buyers-grid">
+                <div class="buyer-card">
+                    <div class="buyer-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Hedge funds and investment firms</h3>
+                    <p>To enhance trading models with new data sources and gain competitive edge in financial markets.</p>
+                </div>
+                
+                <div class="buyer-card">
+                    <div class="buyer-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Private equity and venture capital</h3>
+                    <p>To evaluate business performance using alternative indicators and make better investment decisions.</p>
+                </div>
+                
+                <div class="buyer-card">
+                    <div class="buyer-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Corporates and enterprises</h3>
+                    <p>To gain competitive insights through unique datasets and drive strategic business decisions.</p>
+                </div>
+                
+                <div class="buyer-card">
+                    <div class="buyer-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI companies</h3>
+                    <p>To get training data for AI models and improve machine learning algorithms with diverse datasets.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">Connect with the right data buyers now.</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>How Lytfoot creates buyer-seller alignment</h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h3>Market intelligence</h3>
+                    <p>Understand what buyers are looking for through comprehensive market research and real-time demand analysis.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h3>Monetisation roadmaps</h3>
+                    <p>Ensure your data meets buyer expectations and market demand with tailored commercialization strategies.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h3>Tailored matchmaking</h3>
+                    <p>Connect with verified, high-intent data buyers who are actively seeking datasets like yours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to connect with the right data buyers?</h2>
+            <p>Discover who in our network is looking for data like yours</p>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                        <div class="logo-text">Lytfoot</div>
+                    </div>
+                    <p>Transforming data into business advantage</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="solutions.html#data-buyers">For Data Buyers</a></li>
+                            <li><a href="solutions.html#data-sellers">For Data Sellers</a></li>
+                            <li><a href="solutions.html#data-monetization">Data Monetization</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:info@lytfoot.co.uk">info@lytfoot.co.uk</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lytfoot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- List Data Modal -->
+    <div class="modal" id="list-data-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>List Your Data - Free</h2>
+            <form id="list-data-form">
+                <div class="form-group">
+                    <label for="company-name">Company Name</label>
+                    <input type="text" id="company-name" name="company-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-name">Contact Name</label>
+                    <input type="text" id="contact-name" name="contact-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email</label>
+                    <input type="email" id="contact-email" name="contact-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="data-product">Data Product Name</label>
+                    <input type="text" id="data-product" name="data-product" required>
+                </div>
+                <div class="form-group">
+                    <label for="data-category">Data Category</label>
+                    <select id="data-category" name="data-category" required>
+                        <option value="">Select a category</option>
+                        <option value="consumer">Consumer Transaction Data</option>
+                        <option value="web">Web Data</option>
+                        <option value="satellite">Satellite Imagery</option>
+                        <option value="social">Social Media Data</option>
+                        <option value="sensor">Sensor Data</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="target-buyers">Target Buyer Types</label>
+                    <select id="target-buyers" name="target-buyers" multiple>
+                        <option value="hedge-funds">Hedge Funds</option>
+                        <option value="private-equity">Private Equity</option>
+                        <option value="corporates">Corporates</option>
+                        <option value="ai-companies">AI Companies</option>
+                        <option value="all">All Types</option>
+                    </select>
+                    <small>Hold Ctrl/Cmd to select multiple options</small>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Product Description</label>
+                    <textarea id="product-description" name="product-description" rows="4" placeholder="Briefly describe your data product and its potential applications..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-purple">Submit Listing Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const modal = document.getElementById('list-data-modal');
+            const listDataBtns = document.querySelectorAll('#hero-list-data, #intro-list-data, #buyers-connect, #cta-find-buyers');
+            const closeBtn = modal.querySelector('.close');
+            
+            // Open modal when list data button is clicked
+            listDataBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            });
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            const listDataForm = document.getElementById('list-data-form');
+            
+            if (listDataForm) {
+                listDataForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+                    
+                    // In a real implementation, you would send this data to your server
+                    // For this example, we'll just show a success message
+                    alert('Thank you for your listing request! We will contact you soon to connect you with relevant buyers in our network.');
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Close modal
+                    modal.style.display = 'none';
+                });
+            }
+            
+            // Request demo button functionality
+            const requestDemoBtn = document.getElementById('request-demo-btn');
+            if (requestDemoBtn) {
+                requestDemoBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('For demo requests, please visit our main solutions page or contact us directly.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

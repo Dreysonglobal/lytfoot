@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monetise Data Safely | Lytfoot</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #32502c;
+            --secondary: #7fdb34;
+            --accent: #7fdb34;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #f8f9fa;
+            --pink: #ff6b8b;
+            --purple: #9b59b6;
+            --teal: #7fdb34;
+            --blue: #3498db;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-teal {
+            background-color: var(--teal);
+        }
+
+        .btn-teal:hover {
+            background-color: #16a085;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        .nav-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #32502c 0%, #1a2f1a 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(126, 217, 87, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(50, 80, 44, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(26, 47, 26, 0.5) 0%, transparent 50%);
+        }
+
+        .wave-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--gray);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        .intro-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .intro-text p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .intro-image {
+            position: relative;
+        }
+
+        .abstract-bg {
+            width: 100%;
+            height: 400px;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(126, 217, 87, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(50, 80, 44, 0.6) 0%, transparent 50%),
+                linear-gradient(135deg, #32502c 0%, #1a2f1a 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abstract-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 20px);
+        }
+
+        /* Safe Space Section */
+        .safe-space-section {
+            padding: 80px 0;
+        }
+
+        .safe-space-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .safe-space-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .safe-space-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .safe-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .icon-purple {
+            background: linear-gradient(135deg, var(--purple) 0%, #8e44ad 100%);
+        }
+
+        .icon-green {
+            background: linear-gradient(135deg, var(--secondary) 0%, #27ae60 100%);
+        }
+
+        .icon-pink {
+            background: linear-gradient(135deg, var(--pink) 0%, #e84393 100%);
+        }
+
+        .safe-space-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .safe-space-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Process Section */
+        .process-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .process-step {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--teal);
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--teal);
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .process-step h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .process-step p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Insights Section */
+        .insights-section {
+            padding: 80px 0;
+        }
+
+        .insights-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .insights-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .insights-text p {
+            margin-bottom: 30px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .insights-graphic {
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            padding: 40px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .insights-graphic h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .insights-graphic p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-text {
+            color: white;
+        }
+
+        .footer-logo p {
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .link-group h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .link-group ul li {
+            margin-bottom: 10px;
+        }
+
+        .link-group a {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .link-group a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.4s;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .intro-content, .insights-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-hero h1 {
+                font-size: 36px;
+            }
+            
+            .safe-space-grid, .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .abstract-bg {
+                height: 300px;
+            }
+            
+            .insights-graphic {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                <div class="logo-text">Lytfoot</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li>Monetise Data Safely</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-background"></div>
+        <div class="wave-pattern"></div>
+        <div class="container hero-content">
+            <h1>Monetise data safely</h1>
+            <p>Mitigate risks. Ensure compliance. Protect your reputation.</p>
+            
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2>Navigate the complex data monetisation landscape</h2>
+                    <p>Data monetisation is a complex landscape that requires strict compliance with GDPR, CCPA and evolving global regulations. Without the right safeguards, selling data can feel risky and raise concerns about the impact on a brand's reputation.</p>
+                    <p>Lytfoot helps you explore the risks and rewards, ensuring your data strategy enhances your brand, not risk it.</p>
+                    <p>Lytfoot provides a secure, compliant and controlled environment where businesses can test monetisation strategies before making long-term commitments.</p>
+                    <a href="#" class="btn btn-teal" id="intro-compliance-review">Take the first step - assess your data's compliance today</a>
+                </div>
+                <div class="intro-image">
+                    <div class="abstract-bg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safe Space Section -->
+    <section class="safe-space-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>A safe space for data commercialisation</h2>
+            </div>
+            <div class="safe-space-grid">
+                <div class="safe-space-card">
+                    <div class="safe-icon icon-purple">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Risk-free exploration</h3>
+                    <p>Assess opportunities before committing to a full monetisation strategy in our secure testing environment.</p>
+                </div>
+                
+                <div class="safe-space-card">
+                    <div class="safe-icon icon-green">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Regulatory expertise</h3>
+                    <p>Navigate compliance, privacy laws and ethical considerations with our team of legal and data experts.</p>
+                </div>
+                
+                <div class="safe-space-card">
+                    <div class="safe-icon icon-pink">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Data protection first</h3>
+                    <p>Implement industry-leading anonymisation, aggregation and security best practices to protect sensitive information.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn" id="safe-space-consultation">Request a consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Lytfoot ensures your data is market-ready while minimising risks</h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h3>Compliance review</h3>
+                    <p>Align with GDPR, CCPA and industry regulations through comprehensive compliance assessment and gap analysis.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h3>Terms of service and data rights</h3>
+                    <p>Clarify and protect the rights that you have through robust legal frameworks and contractual agreements.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h3>Data protection strategies</h3>
+                    <p>Implement anonymisation, encryption and aggregation techniques to safeguard sensitive information while preserving value.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h3>Risk mitigation framework</h3>
+                    <p>Protect reputational integrity and customer trust through comprehensive risk assessment and mitigation strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="insights-section">
+        <div class="container">
+            <div class="insights-content">
+                <div class="insights-text">
+                    <h2>Insights on safe data monetisation</h2>
+                    <p>Learn more about selling your data securely with our comprehensive guides and expert insights.</p>
+                    <a href="#" class="btn">Read our guide</a>
+                </div>
+                <div class="insights-graphic">
+                    <h3>Strategic Obfuscation</h3>
+                    <p>How does anonymised data hold value while protecting individual privacy?</p>
+                    <p>Discover the techniques that preserve data utility while ensuring complete privacy compliance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Take the first step - assess your data's compliance today</h2>
+            <p>Ensure your data monetisation strategy is built on a foundation of security and compliance</p>
+            <a href="#" class="btn btn-teal" id="cta-compliance-review">Book a compliance review</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                        <div class="logo-text">Lytfoot</div>
+                    </div>
+                    <p>Transforming data into business advantage</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="solutions.html#data-buyers">For Data Buyers</a></li>
+                            <li><a href="solutions.html#data-sellers">For Data Sellers</a></li>
+                            <li><a href="solutions.html#data-monetization">Data Monetization</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:info@lytfoot.co.uk">info@lytfoot.co.uk</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lytfoot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Compliance Review Modal -->
+    <div class="modal" id="compliance-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Book a Compliance Review</h2>
+            <form id="compliance-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry" name="industry" required>
+                        <option value="">Select your industry</option>
+                        <option value="retail">Retail</option>
+                        <option value="finance">Finance</option>
+                        <option value="technology">Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="data-type">What type of data are you considering monetizing?</label>
+                    <select id="data-type" name="data-type">
+                        <option value="">Select data type</option>
+                        <option value="customer">Customer Data</option>
+                        <option value="transaction">Transaction Data</option>
+                        <option value="operational">Operational Data</option>
+                        <option value="sensor">Sensor/IoT Data</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="compliance-concerns">Specific compliance concerns?</label>
+                    <textarea id="compliance-concerns" name="compliance-concerns" rows="4" placeholder="Tell us about any specific compliance or regulatory concerns you have..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-teal">Book Compliance Review</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const modal = document.getElementById('compliance-modal');
+            const complianceBtns = document.querySelectorAll('#hero-compliance-review, #intro-compliance-review, #cta-compliance-review');
+            const consultationBtn = document.getElementById('safe-space-consultation');
+            const closeBtn = modal.querySelector('.close');
+            
+            // Open modal when compliance review button is clicked
+            complianceBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            });
+            
+            // Open modal when consultation button is clicked
+            if (consultationBtn) {
+                consultationBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            }
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            const complianceForm = document.getElementById('compliance-form');
+            
+            if (complianceForm) {
+                complianceForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+                    
+                    // In a real implementation, you would send this data to your server
+                    // For this example, we'll just show a success message
+                    alert('Thank you for your compliance review request! We will contact you within 24 hours to schedule your review.');
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Close modal
+                    modal.style.display = 'none';
+                });
+            }
+            
+            // Request demo button functionality
+            const requestDemoBtn = document.getElementById('request-demo-btn');
+            if (requestDemoBtn) {
+                requestDemoBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('For demo requests, please visit our main solutions page or contact us directly.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

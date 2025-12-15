@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Data Monetization? | Lytfoot</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #32502c;
+            --secondary: #7fdb34;
+            --accent: #7fdb34;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #f8f9fa;
+            --pink: #ff6b8b;
+            --purple: #9b59b6;
+            --teal: #7fdb34;
+            --blue: #3498db;
+            --orange: #7fdb34;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-teal {
+            background-color: var(--teal);
+        }
+
+        .btn-teal:hover {
+            background-color: #16a085;
+        }
+
+        .btn-orange {
+            background-color: var(--orange);
+        }
+
+        .btn-orange:hover {
+            background-color: #d35400;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        .nav-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(126, 217, 87, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(52, 152, 219, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(231, 76, 60, 0.5) 0%, transparent 50%);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--gray);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+        }
+
+        /* Definition Section */
+        .definition-section {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        .definition-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .definition-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .definition-text p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        .definition-image {
+            position: relative;
+        }
+
+        .data-visual {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--blue) 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .data-flow {
+            width: 80%;
+            height: 80%;
+            position: relative;
+        }
+
+        .data-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-node:nth-child(1) { top: 10%; left: 20%; }
+        .data-node:nth-child(2) { top: 40%; left: 50%; transform: translateX(-50%); }
+        .data-node:nth-child(3) { top: 70%; right: 20%; }
+
+        .data-connector {
+            position: absolute;
+            height: 4px;
+            background: white;
+            transform-origin: left center;
+        }
+
+        .connector-1 {
+            top: 50px;
+            left: 100px;
+            width: 180px;
+            transform: rotate(20deg);
+        }
+
+        .connector-2 {
+            top: 200px;
+            left: 240px;
+            width: 180px;
+            transform: rotate(-20deg);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 80px 0;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--teal);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--teal) 0%, #16a085 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+        }
+
+        .benefit-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .benefit-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Process Section */
+        .process-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--orange) 0%, #d35400 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex: 1;
+        }
+
+        .step-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .step-content p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Challenges Section */
+        .challenges-section {
+            padding: 80px 0;
+        }
+
+        .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .challenge-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--accent);
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .challenge-icon {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+        }
+
+        .challenge-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .challenge-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Getting Started Section */
+        .getting-started-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .getting-started-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .getting-started-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .getting-started-text p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        .getting-started-image {
+            position: relative;
+        }
+
+        .success-visual {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--teal) 100%);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .success-visual h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .success-visual p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-text {
+            color: white;
+        }
+
+        .footer-logo p {
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .link-group h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .link-group ul li {
+            margin-bottom: 10px;
+        }
+
+        .link-group a {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .link-group a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.4s;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .definition-content, .getting-started-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-hero h1 {
+                font-size: 36px;
+            }
+            
+            .benefits-grid, .challenges-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                align-self: center;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .data-visual, .success-visual {
+                height: 300px;
+            }
+            
+            .data-node {
+                width: 60px;
+                height: 60px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                <div class="logo-text">Lytfoot</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li>What is Data Monetization</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-background"></div>
+        <div class="container hero-content">
+            <h1>What is data monetization?</h1>
+            <p>Transform your internal data into valuable revenue streams</p>
+        </div>
+    </section>
+
+    <!-- Definition Section -->
+    <section class="definition-section">
+        <div class="container">
+            <div class="definition-content">
+                <div class="definition-text">
+                    <h2>Understanding Data Monetization</h2>
+                    <p>Data monetization is the process of converting your company's internal data into valuable assets that generate revenue. By leveraging the information your business naturally collects, you can create new income streams without significant additional investment.</p>
+                    <p>This practice, often called "selling data" or "monetizing internal data," is becoming an important growth strategy for organizations worldwide. It represents a paradigm shift where data transforms from being merely a byproduct of operations to becoming a strategic asset that drives business value.</p>
+                </div>
+                <div class="definition-image">
+                    <div class="data-visual">
+                        <div class="data-flow">
+                            <div class="data-node">Raw Data</div>
+                            <div class="data-node">Process</div>
+                            <div class="data-node">Revenue</div>
+                            <div class="data-connector connector-1"></div>
+                            <div class="data-connector connector-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why consider data monetization?</h2>
+                <p>In today's data-driven world, organizations across various industries are recognising the untapped potential within their data.</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Diversify revenue streams</h3>
+                    <p>Introduce new income sources beyond traditional business operations, creating financial resilience and reducing dependency on core products.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Maximize asset value</h3>
+                    <p>Utilize existing data to its fullest potential, turning a byproduct into a profitable commodity that generates ongoing returns.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Gain competitive advantage</h3>
+                    <p>Offer unique insights to the market, positioning your company as an industry leader and creating barriers to entry for competitors.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Reduce inefficiencies</h3>
+                    <p>Repurpose unused or underutilized data to create value without disrupting operations, maximizing your existing resources.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>How does data monetization work?</h2>
+                <p>The data monetization process typically involves several key steps:</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Data assessment</h3>
+                        <p>Evaluate the data your organization collects to determine its value and potential use cases. This involves analyzing data quality, completeness, uniqueness, and market demand.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Compliance and anonymization</h3>
+                        <p>Ensure all data complies with legal standards like GDPR or CCPA and is anonymized to protect personal information. This step is crucial for maintaining trust and avoiding legal issues.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Market identification</h3>
+                        <p>Identify potential buyers or industries that would benefit from your data insights. This involves understanding market needs, pricing strategies, and competitive landscape.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Data packaging</h3>
+                        <p>Organize and format the data into a product that meets market needs. This includes creating documentation, APIs, dashboards, or other delivery mechanisms that make the data accessible and valuable.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Distribution</h3>
+                        <p>Sell or license the data to interested parties, establishing agreements that define usage terms, pricing models, and ongoing support requirements.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="margin-bottom: 20px; color: var(--gray);">Learn more about how Lytfoot supports businesses through their data monetization journey.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="challenges-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What are the challenges of data monetization?</h2>
+                <p>While data monetization offers significant benefits, it's essential to address potential challenges:</p>
+            </div>
+            <div class="challenges-grid">
+                <div class="challenge-card">
+                    <div class="challenge-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Internal resistance</h3>
+                    <p>Teams may lack awareness of the value of data. Building a culture that supports monetization is key to overcoming organizational inertia and securing buy-in from stakeholders.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3>Compliance concerns</h3>
+                    <p>Work closely with legal and compliance teams to navigate regulations and ensure ethical data use. This includes addressing privacy laws, data protection requirements, and industry-specific regulations.</p>
+                </div>
+                
+                <div class="challenge-card">
+                    <div class="challenge-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data quality</h3>
+                    <p>Maintain high data quality to meet buyer expectations and establish trust in your data products. This requires robust data governance, cleaning processes, and quality assurance measures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="getting-started-section">
+        <div class="container">
+            <div class="getting-started-content">
+                <div class="getting-started-text">
+                    <h2>Getting started with data monetization</h2>
+                    <p>Embarking on a data monetization journey can be complex, but partnering with experts can streamline the process. At Lytfoot, we specialize in guiding businesses through each step, ensuring secure, compliant and profitable data monetization strategies tailored to market demand.</p>
+                    <p>Unlock the potential of your data and transform it into a valuable revenue stream with Lytfoot as your trusted partner.</p>
+                    
+                </div>
+                <div class="getting-started-image">
+                    <div class="success-visual">
+                        <div>
+                            <h3>Ready to Monetize Your Data?</h3>
+                            <p>Start your journey today with expert guidance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Not sure if your data has value? Find out today with a free consultation.</h2>
+            <p>Let our experts assess your data's monetization potential, send us an email.</p>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                        <div class="logo-text">Lytfoot</div>
+                    </div>
+                    <p>Transforming data into business advantage</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="solutions.html#data-buyers">For Data Buyers</a></li>
+                            <li><a href="solutions.html#data-sellers">For Data Sellers</a></li>
+                            <li><a href="solutions.html#data-monetization">Data Monetization</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:info@lytfoot.co.uk">info@lytfoot.co.uk</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lytfoot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Consultation Modal -->
+    <div class="modal" id="consultation-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Free Data Assessment Consultation</h2>
+            <form id="consultation-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry" name="industry" required>
+                        <option value="">Select your industry</option>
+                        <option value="retail">Retail</option>
+                        <option value="finance">Finance</option>
+                        <option value="technology">Technology</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="data-types">What types of data do you collect?</label>
+                    <select id="data-types" name="data-types" multiple>
+                        <option value="customer">Customer Data</option>
+                        <option value="transaction">Transaction Data</option>
+                        <option value="operational">Operational Data</option>
+                        <option value="sensor">Sensor/IoT Data</option>
+                        <option value="web">Web Analytics</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <small>Hold Ctrl/Cmd to select multiple options</small>
+                </div>
+                <div class="form-group">
+                    <label for="goals">What are your primary goals for data monetization?</label>
+                    <textarea id="goals" name="goals" rows="4" placeholder="Tell us about your objectives and what you hope to achieve..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-teal">Request Consultation</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const modal = document.getElementById('consultation-modal');
+            const consultationBtns = document.querySelectorAll('#explore-value, #cta-consultation, #contact-now');
+            const closeBtn = modal.querySelector('.close');
+            
+            // Open modal when consultation button is clicked
+            consultationBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            });
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Form submission
+            const consultationForm = document.getElementById('consultation-form');
+            
+            if (consultationForm) {
+                consultationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+                    
+                    // In a real implementation, you would send this data to your server
+                    // For this example, we'll just show a success message
+                    alert('Thank you for your consultation request! We will contact you within 24 hours to discuss your data monetization potential.');
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Close modal
+                    modal.style.display = 'none';
+                });
+            }
+            
+            // Request demo button functionality
+            const requestDemoBtn = document.getElementById('request-demo-btn');
+            if (requestDemoBtn) {
+                requestDemoBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('For demo requests, please visit our main solutions page or contact us directly.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

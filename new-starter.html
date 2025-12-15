@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Starter - Alternative Data | Lytfoot</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #32502c;
+            --secondary: #7fdb34;
+            --accent: #7fdb34;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #f8f9fa;
+            --pink: #ff6b8b;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        .nav-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--gray);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Data Types Section */
+        .data-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .data-type-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .data-type-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .data-type-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .data-type-content {
+            padding: 30px;
+        }
+
+        .data-type-content h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .data-type-content p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Early Stage Buyers Section */
+        .early-stage-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .buyer-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--pink) 0%, #ff8fa3 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .benefit-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .benefit-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 80px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--secondary);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .testimonial-role {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Learn Section */
+        .learn-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .learn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .learn-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .learn-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .learn-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .learn-content {
+            padding: 25px;
+        }
+
+        .learn-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .learn-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 0;
+        }
+
+        .team-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .team-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .team-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .member-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .member-info .role {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        /* Networking Section */
+        .networking-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .networking-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .networking-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .networking-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .networking-text p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .networking-text ul {
+            margin-bottom: 30px;
+        }
+
+        .networking-text li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .networking-text li:before {
+            content: '•';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-text {
+            color: white;
+        }
+
+        .footer-logo p {
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .link-group h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .link-group ul li {
+            margin-bottom: 10px;
+        }
+
+        .link-group a {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .link-group a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.4s;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification.success {
+            background-color: #27ae60;
+        }
+
+        .notification.error {
+            background-color: #e74c3c;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .data-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-content, .networking-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-hero h1 {
+                font-size: 36px;
+            }
+            
+            .testimonials-grid, .learn-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .data-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .buyer-benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                <div class="logo-text">Lytfoot</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li>New Starter</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Getting Started with Alternative Data</h1>
+            <p>Your comprehensive guide to understanding and leveraging alternative and market data for investment success</p>
+            <a href="#" id="hero-request-demo" class="btn">Request a Demo</a>
+        </div>
+    </section>
+
+    <!-- Data Types Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="data-types">
+                <div class="data-type-card">
+                    <div class="data-type-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="data-type-content">
+                        <h3>What is alternative data?</h3>
+                        <p>Used by investment managers for over 20 years, alternative data is gathered from non-traditional sources to help firms uncover alpha within their investing processes. Examples include satellite image data, credit card transaction data and data that's scraped from websites.</p>
+                        <p>Many investment managers consider their alternative data sources to provide a competitive edge and consistently seek out new, unique datasets.</p>
+                        <a href="#" class="btn request-demo-btn">Request a Demo</a>
+                    </div>
+                </div>
+                
+                <div class="data-type-card">
+                    <div class="data-type-image" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="data-type-content">
+                        <h3>What is market data?</h3>
+                        <p>Market data is considered by many to be 'table stakes' for operating a successful trading strategy and allows investors to see a security's latest price and related information about that instrument, such as short interest, volatility and volume.</p>
+                        <p>Some data users define the market data space more broadly, preferring the term traditional data, in order to capture datasets like news, geolocation, fund/asset/retail flows and human capital.</p>
+                        <a href="#" class="btn request-demo-btn">Request a Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Early Stage Buyers Section -->
+    <section class="early-stage-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Early-stage data buyers rely on us to answer their most pressing questions</h2>
+            </div>
+            <div class="buyer-benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Cut through vendor noise</h3>
+                    <p>Have you seen too many vendor sales pitches that seem too good to be true?</p>
+                    <p>Cut through the noise with access to Lytfoot's team of expert data researchers.</p>
+                    <p>Find the datasets most likely to help you discover alpha and achieve your investment goals.</p>
+                    <a href="#" class="btn request-demo-btn">Request a Demo</a>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <h3>Improve data investment results</h3>
+                    <p>Have you made some early investments in data and are disappointed by the results?</p>
+                    <p>Draw on advice and expert opinions from Lytfoot's team of 20 full-time data scouts to inform your data investments.</p>
+                    <p>Learn which datasets are "must-haves" for your investment use case and which ones your peers have found lacking.</p>
+                    <a href="#" class="btn request-demo-btn">Request a Demo</a>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚖️</div>
+                    <h3>Ensure compliance and due diligence</h3>
+                    <p>Unsure of what diligence or compliance questions you should be asking your vendors?</p>
+                    <p>Avoid legal and compliance risks that come with selecting a bad dataset.</p>
+                    <p>Benefit from Lytfoot's team of regulatory experts to ensure that your data vendors are compliant with global laws before you start testing data.</p>
+                    <a href="#" class="btn request-demo-btn">Request a Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Read about our partner's results</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Lytfoot has become a trusted partner in our research process. Whether we are approached by a vendor or are working on a new idea, our first stop is to read the Scout report and reach out to the analysts at Lytfoot to better understand the value of the data and any competitive offerings."</p>
+                    <p class="testimonial-author">Head of investment analytics</p>
+                    <p class="testimonial-role">Asset management firm with $500bn+ AUM</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"[Lytfoot events] have been really useful for me and my team because we've had some ideas prompted for things we can look out for trading and we've met both data providers we didn't know existed [and] data providers that we did know were there, but we didn't know some of the things they were doing."</p>
+                    <p class="testimonial-author">Portfolio manager</p>
+                    <p class="testimonial-role">Hedge fund with $15bn AUM</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" id="testimonials-request-demo" class="btn">Request a Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learn Section -->
+    <section class="learn-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Learn</h2>
+                <p>Your playbook to getting started with alternative data</p>
+            </div>
+            <div class="learn-grid">
+                <div class="learn-card">
+                    <div class="learn-image" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="learn-content">
+                        <h3>How-to guides</h3>
+                        <p>Fast-track your learning with access to Lytfoot's library of traditional and alternative data content.</p>
+                        <p>Intelligence articles: Generate investment ideas and see which vendors map to specific real-world use cases</p>
+                        <p>Literature reviews: Analyse academic research on the datasets most likely to generate outsized investment returns</p>
+                        <a href="#" class="btn request-demo-btn">Request a Demo</a>
+                    </div>
+                </div>
+                
+                <div class="learn-card">
+                    <div class="learn-content" style="padding: 40px 25px;">
+                        <h3>Calls with our research team</h3>
+                        <p>Receive expert opinions and trends updates from our team of 20+ data scouting professionals</p>
+                        <p>Ensure the advice you receive is objective and nuanced</p>
+                        <a href="#" class="btn request-demo-btn">Request a Demo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Networking Section -->
+    <section class="networking-section">
+        <div class="container">
+            <div class="networking-content">
+                <div class="networking-image">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Lytfoot team discussion">
+                </div>
+                <div class="networking-text">
+                    <h2>One-to-one networking program</h2>
+                    <p>Be the first to discover alpha-generating datasets via our one-to-one matchmaking program.</p>
+                    <ul>
+                        <li>Discover exclusive new-to-market vendors</li>
+                        <li>Learn about product updates from vendors you are already aware of</li>
+                    </ul>
+                    <a href="#" class="btn request-demo-btn">Request a Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Start your data journey with Lytfoot</h2>
+            <p>Begin leveraging alternative and market data to uncover alpha and gain competitive advantage</p>
+            <a href="#" id="cta-request-demo" class="btn">Request a Demo</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                        <div class="logo-text">Lytfoot</div>
+                    </div>
+                    <p>Transforming data into business advantage</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="solutions.html#data-buyers">For Data Buyers</a></li>
+                            <li><a href="solutions.html#data-sellers">For Data Sellers</a></li>
+                            <li><a href="solutions.html#data-monetization">Data Monetization</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="insights.html">Insights</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:info@lytfoot.co.uk">info@lytfoot.co.uk</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lytfoot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div class="modal" id="demo-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Request a Demo</h2>
+            <form id="demo-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company *</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="title">Job Title</label>
+                    <input type="text" id="title" name="title">
+                </div>
+                <div class="form-group">
+                    <label for="experience-level">Data Experience Level</label>
+                    <select id="experience-level" name="experience-level">
+                        <option value="">Select Experience Level</option>
+                        <option value="beginner">Just Getting Started</option>
+                        <option value="intermediate">Some Experience</option>
+                        <option value="advanced">Experienced User</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="interest">Primary Interest Area</label>
+                    <select id="interest" name="interest">
+                        <option value="">Select Interest Area</option>
+                        <option value="alternative-data">Alternative Data</option>
+                        <option value="market-data">Market Data</option>
+                        <option value="both">Both Alternative & Market Data</option>
+                        <option value="unsure">Not Sure Yet</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="goals">What are your primary goals with data?</label>
+                    <textarea id="goals" name="goals" rows="4" placeholder="Please describe your investment goals and how you plan to use data..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="demo-interest">What would you like to see in the demo?</label>
+                    <textarea id="demo-interest" name="demo-interest" rows="3" placeholder="Specific features, use cases, or questions you have..."></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const modal = document.getElementById('demo-modal');
+            const requestDemoBtns = document.querySelectorAll('#hero-request-demo, #cta-request-demo, #testimonials-request-demo, .request-demo-btn');
+            const closeBtn = modal.querySelector('.close');
+            const demoForm = document.getElementById('demo-form');
+            
+            // Open modal when request demo button is clicked
+            requestDemoBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            });
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Form submission handler
+            demoForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Collect form data
+                const formData = new FormData(this);
+                const data = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+                
+                // Build email body
+                const subject = `New Starter Demo Request - ${data.company || 'New Lead'}`;
+                let body = `New Starter Demo Request Details:\n\n`;
+                
+                body += `Name: ${data.name}\n`;
+                body += `Email: ${data.email}\n`;
+                body += `Company: ${data.company}\n`;
+                body += `Job Title: ${data.title || 'Not specified'}\n`;
+                body += `Experience Level: ${data['experience-level'] || 'Not specified'}\n`;
+                body += `Primary Interest: ${data.interest || 'Not specified'}\n\n`;
+                body += `Goals with Data:\n${data.goals || 'Not specified'}\n\n`;
+                body += `Demo Interests:\n${data['demo-interest'] || 'Not specified'}\n\n`;
+                body += `Submitted: ${new Date().toLocaleString()}\n\n`;
+                body += `Lead Source: New Starter Page`;
+                
+                // Encode for mailto
+                const encodedSubject = encodeURIComponent(subject);
+                const encodedBody = encodeURIComponent(body);
+                const mailto = `mailto:info@lytfoot.co.uk?subject=${encodedSubject}&body=${encodedBody}`;
+                
+                // Show notification
+                showNotification('Opening your email client to send the request...', 'success');
+                
+                // Reset form and close modal
+                this.reset();
+                modal.style.display = 'none';
+                
+                // Open email client
+                setTimeout(function() {
+                    window.location.href = mailto;
+                }, 100);
+            });
+            
+            // Notification function
+            function showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after 5 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 5000);
+            }
+            
+            // Add notification styles if not already in CSS
+            if (!document.querySelector('style[data-notifications]')) {
+                const style = document.createElement('style');
+                style.setAttribute('data-notifications', 'true');
+                style.textContent = `
+                    .notification {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        padding: 15px 20px;
+                        border-radius: 4px;
+                        color: white;
+                        font-weight: 500;
+                        z-index: 10000;
+                        animation: slideIn 0.3s ease;
+                    }
+                    .notification.success {
+                        background-color: #27ae60;
+                    }
+                    .notification.error {
+                        background-color: #e74c3c;
+                    }
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                    @keyframes slideOut {
+                        from { transform: translateX(0); opacity: 1; }
+                        to { transform: translateX(100%); opacity: 0; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        });
+    </script>
+</body>
+</html>

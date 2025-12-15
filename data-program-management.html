@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigator - Data Program Management | Lytfoot</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #32502c;
+            --secondary: #7fdb34;
+            --accent: #7fdb34;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #f8f9fa;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        .nav-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--gray);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Content Block */
+        .content-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .content-block:nth-child(even) .content-text {
+            order: 2;
+        }
+
+        .content-block:nth-child(even) .content-image {
+            order: 1;
+        }
+
+        .content-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .content-text p, .content-text ul {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .content-text ul {
+            padding-left: 20px;
+        }
+
+        .content-text li {
+            margin-bottom: 10px;
+            list-style-type: disc;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Inbox Section */
+        .inbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .inbox-item {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .inbox-item h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .inbox-item p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--primary);
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: #555;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 60px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            color: var(--gray);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-text {
+            color: white;
+        }
+
+        .footer-logo p {
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .link-group h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .link-group ul li {
+            margin-bottom: 10px;
+        }
+
+        .link-group a {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .link-group a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.4s;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .content-block {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-block:nth-child(even) .content-text {
+                order: 1;
+            }
+            
+            .content-block:nth-child(even) .content-image {
+                order: 2;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-hero h1 {
+                font-size: 36px;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .inbox-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                <div class="logo-text">Lytfoot</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li>Data Program Management</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Introducing Navigator, the complete command-and-control platform for your data program</h1>
+            <p>Streamline your data management with our comprehensive platform designed to handle data cataloguing, subscriptions, trials, and risk assessment in one unified solution.</p>
+            
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-block">
+                <div class="content-text">
+                    <h2>Why Navigator?</h2>
+                    <p>Over the years, we've had many conversations with our clients regarding challenges they face managing data beyond the data intelligence and research we provide.</p>
+                    <p>We heard pain points ranging from a lack of very basic functions such as data cataloguing and simple cost reporting to more acute ones when conducting data assessments, ensuring compliance, and driving cost negotiations.</p>
+                </div>
+                <div class="content-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Data Management Challenges">
+                </div>
+            </div>
+
+            
+    </section>
+
+    <!-- Why Navigator Section -->
+    <section class="content-section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Navigator</h2>
+                <p>Streamline your data program management with our comprehensive platform</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Streamline</h3>
+                    <p>Use one tool to govern the full data lifecycle efficiently.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Integrate</h3>
+                    <p>Power your systems with our industry leading content and research. Supports custom integrations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Increase ROI</h3>
+                    <p>Generate alpha from your data. Reduce your subscription costs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inbox Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Stay informed and take action</h2>
+                <p>Eliminate context switching with your data program's smart inbox for actionable alerts, insights and task management</p>
+            </div>
+            <div class="inbox-grid">
+                <div class="inbox-item">
+                    <h3>Trial notifications</h3>
+                    <p>Stay updated on all trial activities</p>
+                </div>
+                <div class="inbox-item">
+                    <h3>Contract renewals</h3>
+                    <p>Never miss a renewal deadline</p>
+                </div>
+                <div class="inbox-item">
+                    <h3>Overdue tasks</h3>
+                    <p>Track and complete pending actions</p>
+                </div>
+                <div class="inbox-item">
+                    <h3>Data requests</h3>
+                    <p>Manage incoming data requests</p>
+                </div>
+                <div class="inbox-item">
+                    <h3>Compliance updates</h3>
+                    <p>Stay compliant with regulations</p>
+                </div>
+                <div class="inbox-item">
+                    <h3>Data usage alerts</h3>
+                    <p>Monitor data consumption</p>
+                </div>
+                <div class="inbox-item">
+                    <h3>Insights</h3>
+                    <p>Get actionable intelligence</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Catalogue Section -->
+    <section class="content-section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="content-block">
+                <div class="content-text">
+                    <h2>Data catalogue</h2>
+                    <h3>Unify your data catalogue</h3>
+                    <p>A single source of truth for seamless integration, discovery and decision making on datasets and vendors.</p>
+                    <ul>
+                        <li><strong>Catalogue your own data:</strong> Add your vendors, datasets, brokers, service providers, and other custom data assets you manage</li>
+                        <li><strong>Synchronised with Neudata's library:</strong> Realtime updates to your catalogue from Neudata's managed library of over 8,000 alternative and market data products</li>
+                        <li><strong>Flexible integrations:</strong> Keep your key systems in place using Navigator's custom integrations</li>
+                    </ul>
+                </div>
+                <div class="content-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Data Catalogue Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trial Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-block">
+                <div class="content-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Trial Management Dashboard">
+                </div>
+                <div class="content-text">
+                    <h2>Trial</h2>
+                    <h3>Collaboratively manage your data trials</h3>
+                    <p>Conduct data trials as projects, define your assessment criteria, assign and collaborate on tasks and compare products</p>
+                    <ul>
+                        <li><strong>Set your data objectives:</strong> Capture business goals, assign sponsors, and define key data criteria to achieve them</li>
+                        <li><strong>Evaluate data products:</strong> Select potential datasets and collaborate on assessment activities</li>
+                        <li><strong>Onboarding decisions:</strong> Rank datasets based on your assessment criteria — approve or reject products for use</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscriptions Section -->
+    <section class="content-section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="content-block">
+                <div class="content-text">
+                    <h2>Subscriptions</h2>
+                    <h3>Capture subscriptions, contracts and negotiations</h3>
+                    <p>Manage your data product subscriptions, represent contracts and save money during renewals</p>
+                    <ul>
+                        <li><strong>Create subscriptions:</strong> Create contracts, capture key dates, license terms, cost breakdown, and setup notifications</li>
+                        <li><strong>Manage licenses:</strong> Setup users under individual user, enterprise, pay as you go, or credit based license models</li>
+                        <li><strong>Negotiate renewals:</strong> Summarise vendor relationships, revisit past negotiations, price comparable datasets and capture outcomes</li>
+                        <li><strong>Report spend:</strong> Allocate invoices, track payments, assign cost per user, and summarise costs in your selected currency</li>
+                    </ul>
+                </div>
+                <div class="content-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Subscriptions Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Risk Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-block">
+                <div class="content-image">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Risk Management Dashboard">
+                </div>
+                <div class="content-text">
+                    <h2>Risk</h2>
+                    <h3>Identify, mitigate and reduce risk</h3>
+                    <p>Uncover and mitigate risks across vendors, datasets and trials. Follow up with actions and escalations.</p>
+                    <ul>
+                        <li><strong>Custom risk capture:</strong> Define risk categories, provide definitions, and set impact levels according to your risk tolerance</li>
+                        <li><strong>Make risk assessments:</strong> Capture risk assessments on vendors, datasets and custom data assets when performing due diligence</li>
+                        <li><strong>Summarise risks:</strong> Report on risk based on category, impact level and share with key stakeholders</li>
+                        <li><strong>Follow-up actions:</strong> Remediate or mitigate risks by assigning users to take action</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Features Section -->
+    <section class="content-section" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Powerful out of the box</h2>
+                <p>Platform-wide features designed for enterprise data management</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Security</h3>
+                    <p>Built from day one with a privacy-focused design and compliant approach.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Permissions</h3>
+                    <p>Create and assign permissions to manage visibility and editing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Audit trail</h3>
+                    <p>Real time activity feed and comments for every entity and action.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏷️</div>
+                    <h3>Tag manager</h3>
+                    <p>Create and tag any entity in Navigator to make searching easier.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Get answers to common questions about Navigator</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I use Navigator with my existing data catalogue or payment system?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Navigator is designed to integrate with your existing systems. Our flexible API allows seamless connection with data catalogues, payment systems, and other enterprise software.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I subscribe to certain modules within Navigator such as Trial Management?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. Navigator is modular by design, allowing you to subscribe only to the components you need, whether it's Trial Management, Data Catalogue, Subscriptions, or Risk Management.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I import my data content from existing systems?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we provide data migration tools and services to help you import your existing data content, vendor information, contracts, and other relevant data into Navigator.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Does Navigator integrate with my Scout/Ranger subscriptions?</span>
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, Navigator seamlessly integrates with Neudata's Scout and Ranger subscriptions, providing a unified platform for data discovery, evaluation, and management.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="cta-section">
+                <h2>Data programs are complicated – simplify yours.</h2>
+                <p>Discover how Navigator can transform your data management approach and deliver tangible business value.</p>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                        <div class="logo-text">Lytfoot</div>
+                    </div>
+                    <p>Transforming data into business advantage</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="solutions.html#data-buyers">For Data Buyers</a></li>
+                            <li><a href="solutions.html#data-sellers">For Data Sellers</a></li>
+                            <li><a href="solutions.html#data-monetization">Data Monetization</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:info@lytfoot.co.uk">info@lytfoot.co.uk</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lytfoot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div class="modal" id="demo-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Request a Demo</h2>
+            <form id="demo-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your data management needs..."></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const modal = document.getElementById('demo-modal');
+            const requestDemoBtns = document.querySelectorAll('#request-demo-btn, #hero-request-demo, #cta-request-demo');
+            const closeBtn = modal.querySelector('.close');
+            
+            // Open modal when request demo button is clicked
+            requestDemoBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            });
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // FAQ functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', function() {
+                    // Toggle active class on clicked item
+                    item.classList.toggle('active');
+                    
+                    // Update the toggle icon
+                    const icon = question.querySelector('span:last-child');
+                    icon.textContent = item.classList.contains('active') ? '−' : '+';
+                });
+            });
+            
+            // Form submission is now handled by script.js with mailto functionality
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Equity Data Solutions | Lytfoot</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #32502c;
+            --secondary: #7fdb34;
+            --accent: #7fdb34;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #f8f9fa;
+            --pink: #ff6b8b;
+            --gold: #ffd700;
+        }
+
+        body {
+            color: #333;
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+        }
+
+        .btn-accent:hover {
+            background-color: #c0392b;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        .nav-btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        .nav-btn:hover {
+            background-color: #c0392b;
+            color: white;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 20px 0;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .breadcrumb ul {
+            display: flex;
+            gap: 10px;
+        }
+
+        .breadcrumb li:not(:last-child)::after {
+            content: ">";
+            margin-left: 10px;
+            color: var(--gray);
+        }
+
+        .breadcrumb a {
+            color: var(--gray);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Deal Lifecycle Section */
+        .deal-lifecycle {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .lifecycle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .lifecycle-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+        }
+
+        .lifecycle-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .lifecycle-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--gold) 0%, #ffed4e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 32px;
+        }
+
+        .lifecycle-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .lifecycle-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Statistics Section */
+        .statistics-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            padding: 50px 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .stat-text {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        /* Questions Section */
+        .questions-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .question-header {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .question-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--pink) 0%, #ff8fa3 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .question-header h3 {
+            font-size: 22px;
+            color: var(--primary);
+            line-height: 1.4;
+        }
+
+        .question-content {
+            padding: 30px;
+        }
+
+        .lytfoot-capabilities {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .lytfoot-capabilities h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .capabilities-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+
+        .capabilities-list li:before {
+            content: '✓';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Work With Us Section */
+        .work-with-us {
+            padding: 80px 0;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .work-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--secondary);
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .work-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .work-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        /* Solutions Section */
+        .solutions-section {
+            background-color: var(--light-gray);
+            padding: 80px 0;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .solution-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .solution-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .solution-content {
+            padding: 30px;
+        }
+
+        .solution-content h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .solution-content .solution-type {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .solution-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .solution-features {
+            margin-bottom: 25px;
+        }
+
+        .solution-features li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .solution-features li:before {
+            content: '•';
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .member-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .member-info .role {
+            color: var(--secondary);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Connections Section */
+        .connections-section {
+            padding: 80px 0;
+        }
+
+        .connections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .connection-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--gold);
+        }
+
+        .connection-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .connection-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .connection-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .connection-card .connection-type {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .connection-card p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            margin-bottom: 30px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .logo-text {
+            color: white;
+        }
+
+        .footer-logo p {
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .link-group h4 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .link-group ul li {
+            margin-bottom: 10px;
+        }
+
+        .link-group a {
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .link-group a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: modalopen 0.4s;
+            max-height: 90vh;
+            overflow: auto;
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .close:hover {
+            color: var(--primary);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .questions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .page-hero h1 {
+                font-size: 36px;
+            }
+            
+            .lifecycle-grid, .solutions-grid, .connections-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+            }
+            
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .questions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-card {
+                padding: 30px 20px;
+            }
+            
+            .stat-number {
+                font-size: 36px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                <div class="logo-text">Lytfoot</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="insights.html">Insights</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="solutions.html">Solutions</a></li>
+                <li>Private Equity</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Key intelligence for private markets investors through the deal lifecycle</h1>
+            <p>Leverage alternative data to source deals, conduct due diligence, and create value in portfolio companies</p>
+            
+        </div>
+    </section>
+
+    <!-- Deal Lifecycle Section -->
+    <section class="deal-lifecycle">
+        <div class="container">
+            <div class="lifecycle-grid">
+                <div class="lifecycle-card">
+                    <div class="lifecycle-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Deal Sourcing</h3>
+                    <p>Ensure you don't miss any crucial deal targets. Identify companies that fit your investment criteria and indicate when a company is growing faster than its peers.</p>
+                </div>
+                
+                <div class="lifecycle-card">
+                    <div class="lifecycle-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Due Diligence</h3>
+                    <p>Address key diligence questions and save time when researching, interviewing and testing data providers with comprehensive vendor intelligence.</p>
+                </div>
+                
+                <div class="lifecycle-card">
+                    <div class="lifecycle-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Portfolio Value Creation</h3>
+                    <p>Build value within your portfolio companies and highlight opportunities to implement data-driven strategies within your portfolio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="statistics-section">
+        <div class="container">
+            <div class="stat-card">
+                <div class="stat-number">27%</div>
+                <div class="stat-text">of PE investors currently use alternative data, while another 25% plan on doing so in the future.</div>
+                <p>Don't get left behind in the data revolution</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Questions Section -->
+    <section class="questions-section">
+        <div class="container">
+            <div class="questions-grid">
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-icon">📈</div>
+                        <h3>How can I build accurate indicators around a company's revenue growth and financial performance to source new target investments?</h3>
+                    </div>
+                    <div class="question-content">
+                        <div class="lytfoot-capabilities">
+                            <h4>Lytfoot can:</h4>
+                            <ul class="capabilities-list">
+                                <li>educate private equity clients on how they can use consumer transactional data to solve this problem.</li>
+                                <li>identify which data providers are best suited for each use case, including providing intelligence on vendor panel sizes, underlying data sources and panel diversity.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-icon">🚀</div>
+                        <h3>What other sources can I use to identify high-growth companies?</h3>
+                    </div>
+                    <div class="question-content">
+                        <div class="lytfoot-capabilities">
+                            <h4>Lytfoot can:</h4>
+                            <ul class="capabilities-list">
+                                <li>introduce its private equity clients to sentiment data vendors, which scrape media outlets and company websites to monitor positive/negative brand sentiment, as well as events that indicate growth (like fundraising, new product launches, market expansion, etc.)</li>
+                                <li>provide anonymised intelligence on the vendors that its clients' peer groups find useful, and those that lack accurate signals after testing.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-icon">⏱️</div>
+                        <h3>How can I find cost-effective data within a short time frame that addresses key questions on each of my deals?</h3>
+                    </div>
+                    <div class="question-content">
+                        <div class="lytfoot-capabilities">
+                            <h4>Lytfoot can:</h4>
+                            <ul class="capabilities-list">
+                                <li>provide a structured framework and consultative guidance from its team of 20+ research analysts and expert consulting team on how to approach the research process for unfamiliar data sources</li>
+                                <li>save its clients time during the interviewing and testing phase by conducting research upfront and providing it in a searchable catalogue</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-icon">💎</div>
+                        <h3>How can I use data to build value within my portfolio companies?</h3>
+                    </div>
+                    <div class="question-content">
+                        <div class="lytfoot-capabilities">
+                            <h4>Lytfoot can:</h4>
+                            <ul class="capabilities-list">
+                                <li>recommend datasets that upgrade portfolio company operational process and create value post-acquisition</li>
+                                <li>provide advice on data vendors that offer products to track portfolio company momentum and the momentum of competing products</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work With Us Section -->
+    <section class="work-with-us">
+        <div class="container">
+            <div class="section-header">
+                <h2>Work with us</h2>
+            </div>
+            <div class="work-grid">
+                <div class="work-card">
+                    <h3>Deal Sourcing Intelligence</h3>
+                    <p>Identify promising investment targets before your competitors with early signals of company growth and performance.</p>
+                </div>
+                
+                <div class="work-card">
+                    <h3>Due Diligence Acceleration</h3>
+                    <p>Streamline your research process with curated data providers and pre-vetted alternative data sources for faster deal execution.</p>
+                </div>
+                
+                <div class="work-card">
+                    <h3>Portfolio Optimization</h3>
+                    <p>Implement data-driven strategies within your portfolio companies to drive operational improvements and value creation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="solutions-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Lytfoot's solutions</h2>
+            </div>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="solution-content">
+                        <span class="solution-type">Software</span>
+                        <h3>Powerful data scouting software</h3>
+                        <p>Thousands of research reports, use cases and real-time updates at your fingertips.</p>
+                        <ul class="solution-features">
+                            <li>Easily search and compare thousands of data products</li>
+                            <li>Read objective and neutral reports by data analysts</li>
+                            <li>Insight on trends and data products gaining traction</li>
+                            <li>Monitor risk and compliance events</li>
+                        </ul>
+                        
+                </div>
+                
+                <div class="solution-card">
+                    <div class="solution-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="solution-content">
+                        <span class="solution-type">Research services</span>
+                        <h3>Get access to our experts</h3>
+                        <p>Our team of research analysts in London, New York and Shanghai work for you – not the vendors – to provide objective opinions and scouting services. Draw on their 100+ years of experience to inform your alternative data programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connections Section -->
+    <section class="connections-section">
+        <div class="container">
+            <div class="connections-grid">
+                <div class="connection-card">
+                    <div class="connection-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <span class="connection-type">Connections</span>
+                    <h3>Regular industry events</h3>
+                    <p>Learn from alternative data's leading experts. Make life-long professional connections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Transform Your Private Equity Strategy with Alternative Data</h2>
+            <p>Join leading private equity firms that leverage Lytfoot to gain competitive advantage throughout the investment lifecycle</p>
+           
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <div class="logo-icon"><img src="images/lytfoot.svg" alt="Lytfoot"></div>
+                        <div class="logo-text">Lytfoot</div>
+                    </div>
+                    <p>Transforming data into business advantage</p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="solutions.html#data-buyers">For Data Buyers</a></li>
+                            <li><a href="solutions.html#data-sellers">For Data Sellers</a></li>
+                            <li><a href="solutions.html#data-monetization">Data Monetization</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="insights.html">Insights</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><a href="mailto:info@lytfoot.co.uk">info@lytfoot.co.uk</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Lytfoot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Modal -->
+    <div class="modal" id="demo-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Request a Demo</h2>
+            <form id="demo-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your private equity data needs and challenges..."></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal functionality
+            const modal = document.getElementById('demo-modal');
+            const requestDemoBtns = document.querySelectorAll('#request-demo-btn, #hero-request-demo, #cta-request-demo');
+            const closeBtn = modal.querySelector('.close');
+            
+            // Open modal when request demo button is clicked
+            requestDemoBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = 'block';
+                });
+            });
+            
+            // Close modal when X is clicked
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Form submission is now handled by script.js with mailto functionality
+        });
+    </script>
+</body>
+</html>
